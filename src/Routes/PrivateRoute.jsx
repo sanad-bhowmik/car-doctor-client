@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 
 const PrivateRoute = ({ children }) => {
     const { user, loading } = useContext(AuthContext);
+    const location = useLocation();
+
     if (loading) {
         return <div
             className="inline-block h-12 mt-24 mb-24 ml-[50%] w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
@@ -19,7 +21,7 @@ const PrivateRoute = ({ children }) => {
         return children
     }
     return (
-        <Navigate to='/login' replace></Navigate>
+        <Navigate to='/login' state={{ from: location }} replace></Navigate>
     );
 };
 

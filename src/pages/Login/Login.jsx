@@ -2,10 +2,21 @@ import React, { useContext } from 'react';
 import img from '../../assets/images/login/login.svg'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
+import toast, { Toaster } from 'react-hot-toast';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    const { signIn } = useContext(AuthContext)
+    const { signIn } = useContext(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate();
 
+    const from = location.state?.from?.pathname || '/';
+
+    const notify = () => toast.success('Login Successfully', {
+        style: {
+            background: 'linear-gradient(155deg,  #ffcc66, #66ff66)'
+        }
+    });
     const handleLogin = event => {
         event.preventDefault();
         const form = event.target;
@@ -16,11 +27,15 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                navigate(from, { replace: true })
+                form.reset();
+                notify();
             })
             .catch(error => console.log(error));
     }
     return (
         <div className="hero min-h-screen bg-base-200">
+            <Toaster />
             <div className="hero-content flex-col lg:flex-row">
                 <div className="mr-16 w-1/2">
                     <img src={img} alt="" />
@@ -39,7 +54,7 @@ const Login = () => {
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="text" placeholder="password" name='password' className="input input-bordered" />
+                                <input type="password" placeholder="password" name='password' className="input input-bordered" />
                                 <label className="label">
                                     <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                 </label>
