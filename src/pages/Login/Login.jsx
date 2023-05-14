@@ -35,7 +35,7 @@ const Login = () => {
                 navigate(from, { replace: true })
                 form.reset();
                 notify();
-                fetch('http://localhost:5000/jwt', {
+                fetch('https://server-car-doctor-sanad-bhowmik.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

@@ -10,7 +10,7 @@ const Bookings = () => {
     const [bookings, setBookings] = useState([]);
     const navigate = useNavigate()
 
-    const url = `http://localhost:5000/bookings?email=${user?.email}`;
+    const url = `https://server-car-doctor-sanad-bhowmik.vercel.app/bookings?email=${user?.email}`;
     useEffect(() => {
         fetch(url, {
             method: 'GET',
