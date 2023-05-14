@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
 import toast, { Toaster } from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 const Login = () => {
     const { signIn } = useContext(AuthContext);
@@ -80,6 +81,7 @@ const Login = () => {
                             </div>
                         </form>
                         <p className='my-4 text-center'>New to Car Doctors? <Link className='text-orange-600 font-bold font-serif' to='/signup'>Sign up</Link> </p>
+                        <SocialLogin/>
                     </div>
                 </div>
             </div>
